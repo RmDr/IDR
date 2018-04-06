@@ -30,8 +30,9 @@ all points. {} > {}.'''.format(n_neighbors, len(points)))
     for attempt_i in range(n_tries):
         point_index = np.random.randint(len(points))
         plt.scatter(*points.T, c='black', s=points_size)
-        nearest_indices = np.argsort(distance_matrix[point_index])[1: n_neighbors + 1]
-        farthest_indices = np.argsort(distance_matrix[point_index])[-n_neighbors: ]
+        sorted_indices = np.argsort(distance_matrix[point_index])
+        nearest_indices = sorted_indices[1: n_neighbors + 1]
+        farthest_indices = sorted_indices[-n_neighbors: ]
         plt.scatter(*points[nearest_indices].T, c='red', s=neighbors_size)
         plt.scatter(*points[farthest_indices].T, c='blue', s=neighbors_size)
         point = points[point_index]
